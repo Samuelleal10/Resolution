@@ -13,26 +13,26 @@
        Equipes
     </ui:define>  
 
-<!--    <ui:define name="menu-geral">
+    <ui:define name="menu-geral">
         <ui:include src="menu.xhtml" />
-    </ui:define>   -->
-
+    </ui:define> 
+    
     <ui:define name="conteudo">
 
-        Equipes:
-        <h:form>
-            <h:panelGrid columns ="2">
+        Especialidade:
+         <h:form>
+             <h:panelGrid columns ="2">
                 <h:outputLabel value ="Nome: " for ="campo-nome" />
-                <h:inputText value ="#{equipeBean.equipe.nome}" id="campo-nome" />
+               <h:inputText value ="#{especialidadeBean.especialidade.nome}" id="campo-nome" />
 
-                <p:commandButton value="Adicionar " action ="#{equipeBean.adicionaEquipe}" oncomplete="#{equipeBean.equipes}"/>
+                <h:commandButton value ="Adicionar " action ="#{especialidadeBean.adicionaEspecialidade}" />
             </h:panelGrid > 
         </h:form>
         <h:panelGroup>
-            <h1>Lista de Equipes :</h1>
+            <h1>Lista de Especialidades: :</h1>
             <ul>
-                <ui:repeat value="#{equipeBean.equipes}" var="equipe">
-                    <li><h:outputText value="#{equipe.id} #{equipe.nome}"/></li>
+                <ui:repeat value="#{especialidadeBean.especialidades}" var="esp">
+                    <li><h:outputText value="#{esp.id} #{esp.nome}"/></li>
                 </ui:repeat>
             </ul>
         </h:panelGroup>     

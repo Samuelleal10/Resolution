@@ -12,7 +12,7 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
-import model.SubCategoria;
+import model.Cliente;
 import repository.GenericRepository;
 
 /**
@@ -21,26 +21,27 @@ import repository.GenericRepository;
  */
 @ManagedBean
 @SessionScoped
-public class SubCategoriaBean implements Serializable {
+public class ClienteBean implements Serializable {
+    
+    private Cliente cliente = new Cliente();
+    private List<Class> clientes;
 
-    private SubCategoria subCategoria = new SubCategoria();
-    private List<Class> subCategorias;
-
-    public void adicionaSubCategoria() {
+    public void adicionaCliente() {
         EntityManager manager = this.getEntityManager();
         GenericRepository repository = new GenericRepository(manager);
-        repository.adiciona(this.getSubCategoria());
-        this.setSubCategoria(new SubCategoria());
-        this.subCategorias = null;
+        
+        repository.adiciona(this.getCliente());
+        this.setCliente(new Cliente());
+        this.clientes = null;
     }
 
-    public List<Class> getSubCategorias() {
-        if (this.subCategorias == null) {
+    public List<Class> getClientes() {
+         if(this.clientes == null){
             EntityManager manager = this.getEntityManager();
             GenericRepository repository = new GenericRepository(manager);
-            this.subCategorias = repository.buscaTodos("SubCategoria");
+            this.setClientes(repository.buscaTodos("Cliente"));
         }
-        return this.subCategorias;
+        return this.clientes;
     }
 
     private EntityManager getEntityManager() {
@@ -53,16 +54,23 @@ public class SubCategoriaBean implements Serializable {
     }
 
     /**
-     * @return the subCategoria
+     * @return the cliente
      */
-    public SubCategoria getSubCategoria() {
-        return subCategoria;
+    public Cliente getCliente() {
+        return cliente;
     }
 
     /**
-     * @param subCategoria the subCategoria to set
+     * @param cliente the cliente to set
      */
-    public void setSubCategoria(SubCategoria subCategoria) {
-        this.subCategoria = subCategoria;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    /**
+     * @param clientes the clientes to set
+     */
+    public void setClientes(List<Class> clientes) {
+        this.clientes = clientes;
     }
 }

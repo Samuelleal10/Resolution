@@ -13,7 +13,7 @@ import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
 import model.Equipe;
-import model.EquipeRepository;
+import repository.GenericRepository;
 
 /**
  *
@@ -24,22 +24,22 @@ import model.EquipeRepository;
 public class EquipeBean implements Serializable {
     
     private Equipe equipe = new Equipe();
-    private List<Equipe> equipes;
+    private List<Class> equipes;
 
     public void adicionaEquipe() {
         EntityManager manager = this.getEntityManager();
-        EquipeRepository repository = new EquipeRepository(manager);
+        GenericRepository repository = new GenericRepository(manager);
         
         repository.adiciona(this.getEquipe());
         this.setEquipe(new Equipe());
         this.equipes = null;
     }
 
-    public List<Equipe> getEquipes() {
+    public List<Class> getEquipes() {
          if(this.equipes == null){
             EntityManager manager = this.getEntityManager();
-            EquipeRepository repository = new EquipeRepository(manager);
-            this.equipes =  repository.buscaTodos();
+            GenericRepository repository = new GenericRepository(manager);
+            this.equipes =  repository.buscaTodos("Equipe");
         }
         return this.equipes;
     }

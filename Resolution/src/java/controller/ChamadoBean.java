@@ -13,7 +13,7 @@ import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
 import model.Chamado;
-import model.ChamadoRepository;
+import repository.GenericRepository;
 
 /**
  *
@@ -24,22 +24,22 @@ import model.ChamadoRepository;
 public class ChamadoBean implements Serializable {
     
     private Chamado chamado = new Chamado();
-    private List<Chamado> chamados;
+    private List<Class> chamados;
 
     public void adicionaChamado() {
         EntityManager manager = this.getEntityManager();
-        ChamadoRepository repository = new ChamadoRepository(manager);
+        GenericRepository repository = new GenericRepository(manager);
         
         repository.adiciona(this.getChamado());
         this.setChamado(new Chamado());
         this.chamados = null;
     }
 
-    public List<Chamado> getChamados() {
+    public List<Class> getChamados() {
          if(this.chamados == null){
             EntityManager manager = this.getEntityManager();
-            ChamadoRepository repository = new ChamadoRepository(manager);
-            this.setChamados(repository.buscaTodos());
+            GenericRepository repository = new GenericRepository(manager);
+            this.setChamados(repository.buscaTodos("Chamado"));
         }
         return this.chamados;
     }
@@ -70,7 +70,7 @@ public class ChamadoBean implements Serializable {
     /**
      * @param chamados the chamados to set
      */
-    public void setChamados(List<Chamado> chamados) {
+    public void setChamados(List<Class> chamados) {
         this.chamados = chamados;
     }
 }

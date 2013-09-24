@@ -33,10 +33,11 @@
 
             <p:layoutUnit position="west" size="220" header="#{UsuarioController.loggedUsuario.permissao}" resizable="true" closable="true" collapsible="true" >
                 <h:outputText value="Menu principal" /> 
-                <!--                <ui:insert name="menu-geral">
-                    <ui:include src="/template/menu.xhtml"/> 
-                </ui:insert>-->
-            </p:layoutUnit>          
+                 <ui:insert name="menu-geral">
+
+                </ui:insert>
+            </p:layoutUnit>  
+
             <p:layoutUnit id="conteudo" position="center" resizable="true" closable="true" collapsible="true" effect="drop">
                 <p:messages showDetail="true" autoUpdate="true" />
                 <ui:insert name="conteudo">

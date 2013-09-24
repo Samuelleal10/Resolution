@@ -4,6 +4,10 @@
  */
 package model;
 
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 /**
@@ -11,13 +15,16 @@ import javax.persistence.MappedSuperclass;
  * @author Labin05
  */
 @MappedSuperclass
-public abstract class Funcionario {
+public class Funcionario implements Serializable{
+    @Id @GeneratedValue
+    private Long id;
     private String nome;
     private String nivel;
     private String telefone;
     private String email;
     private String senha;
     private String login;
+    private Departamento departamento;
    // public String categoria; ???
 
     /**
@@ -102,6 +109,28 @@ public abstract class Funcionario {
      */
     public void setLogin(String login) {
         this.login = login;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    /**
+     * @return the departamento
+     */
+    public Departamento getDepartamento() {
+        return departamento;
+    }
+
+    /**
+     * @param departamento the departamento to set
+     */
+    public void setDepartamento(Departamento departamento) {
+        this.departamento = departamento;
     }
     
     

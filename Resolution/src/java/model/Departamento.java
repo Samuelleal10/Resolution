@@ -6,13 +6,14 @@ package model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import util.BaseEntity;
 
 /**
  *
  * @author Labin05
  */
 @Entity
-public class Departamento implements Serializable {
+public class Departamento implements Serializable, BaseEntity {
     @Id @GeneratedValue
     private Long id;
     private String nome;

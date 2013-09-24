@@ -10,29 +10,29 @@
 
 
     <ui:define name="title">
-       Prioridades
+       Equipes
     </ui:define>  
 
-<!--    <ui:define name="menu-geral">
+    <ui:define name="menu-geral">
         <ui:include src="menu.xhtml" />
-    </ui:define>   -->
-
+    </ui:define> 
+    
     <ui:define name="conteudo">
 
-        Prioridades:
+        Equipes:
         <h:form>
             <h:panelGrid columns ="2">
-                <h:outputLabel value ="Prioridades: " for ="campo-descricao" />
-                <h:inputText value ="#{prioridadeBean.prioridade.descricao}" id="campo-descricao" />
+                <h:outputLabel value ="Nome: " for ="campo-nome" />
+                <h:inputText value ="#{equipeBean.equipe.nome}" id="campo-nome" />
 
-                <p:commandButton value="Adicionar " action="#{prioridadeBean.adicionaPrioridade()}" oncomplete="#{prioridadeBean.prioridades}"/>
+                <p:commandButton value="Adicionar " action ="#{equipeBean.adicionaEquipe}" oncomplete="#{equipeBean.equipes}"/>
             </h:panelGrid > 
         </h:form>
         <h:panelGroup>
-            <h1>Lista de Prioridades :</h1>
+            <h1>Lista de Equipes :</h1>
             <ul>
-                <ui:repeat value="#{prioridadeBean.prioridades}" var="prio">
-                    <li><h:outputText value="#{prio.id} #{prio.descricao}"/></li>
+                <ui:repeat value="#{equipeBean.equipes}" var="equipe">
+                    <li><h:outputText value="#{equipe.id} #{equipe.nome}"/></li>
                 </ui:repeat>
             </ul>
         </h:panelGroup>     

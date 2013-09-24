@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<ui:composition template="/layout/layout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                >   
+    <ui:define name="title">
+        Resolution - Departamentos
+    </ui:define>  
+    <ui:define name="menu-geral">
+        <ui:include src="menu.xhtml" />
+    </ui:define> 
+    
+    <ui:define name="conteudo">
+         Departamento
+         <h:form>
+             <h:panelGrid columns ="2">
+                <h:outputLabel value ="Nome: " for ="campo-nome" />
+               <h:inputText value ="#{departamentoBean.dep.nome}" id="campo-nome" />
+
+                <h:outputLabel value ="Sigla: " for ="campo-sigla" />
+                <h:inputText value ="#{departamentoBean.dep.sigla}" id="campo-sigla" />
+                
+                <h:outputLabel value ="Local: " for ="campo-local" />
+                <h:inputText value ="#{departamentoBean.dep.localDep}" id="campo-local" />
+                
+                <h:outputLabel value ="Telefone: " for ="campo-telefone" />
+                <h:inputText value ="#{departamentoBean.dep.telefone}" id="campo-telefone" />
+
+                <h:commandButton value ="Adicionar " action ="#{departamentoBean.adicionaDepartamento}" />
+            </h:panelGrid > 
+        </h:form>
+         
+         <h:panelGroup>
+            <h1>Lista de Departamentos :</h1>
+            <ul>
+                <ui:repeat value="#{departamentoBean.departamentos}" var="dep">
+                    <li><h:outputText value="#{dep.id} #{dep.nome}"/></li>
+                </ui:repeat>
+            </ul>
+        </h:panelGroup> 
+    </ui:define>
+</ui:composition>

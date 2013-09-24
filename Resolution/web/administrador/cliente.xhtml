@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<ui:composition template="/layout/layout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                >   
+
+
+    <ui:define name="title">
+        Usuários
+    </ui:define>  
+
+    <ui:define name="menu-geral">
+        <ui:include src="menu.xhtml" />
+    </ui:define> 
+    
+    <ui:define name="conteudo">
+
+        Usuários:
+        <h:form>
+            <h:panelGrid columns ="2">
+
+                <h:outputLabel value ="Nome: " for ="campo-nome" />
+                <h:inputText value ="#{clienteBean.cliente.nome}" id="campo-nome" />
+
+                <h:outputLabel value ="Nivel: " for ="campo-nivel" />
+                <h:inputText value ="#{clienteBean.cliente.nivel}" id="campo-nivel" />
+
+                <h:outputLabel value ="Telefone: " for ="campo-telefone" />
+                <h:inputText value ="#{clienteBean.cliente.telefone}" id="campo-telefone" />
+
+                <h:outputLabel value ="Email:  " for ="campo-email" />
+                <h:inputText value ="#{clienteBean.cliente.email}" id="campo-email" />
+
+                <h:outputLabel value ="Senha:  " for ="campo-senha" />
+                <h:inputText value ="#{clienteBean.cliente.senha}" id="campo-senha" />
+
+                <h:outputLabel value ="Login:  " for ="campo-login" />
+                <h:inputText value ="#{clienteBean.cliente.login}" id="campo-login" />
+
+                <h:outputLabel  value="Departamento: "/> 
+                <h:selectOneMenu id="departamento" value="#{clienteBean.cliente.departamento}" converter="baseEntityConverter">
+                    <f:selectItem itemLabel=" - Selecionar - " itemValue=""/>
+                    <f:selectItems value="#{departamentoBean.departamentos}" var="obj" itemLabel="#{obj.nome}" itemValue="#{obj}"  />
+                </h:selectOneMenu>
+
+                    <!--       <h:outputLabel  value="Prioridade:"/> 
+                        <h:selectOneMenu id="prioridade" value="#{chamadoBean.chamado.prioridade}" converter="baseEntityConverter">
+                            <f:selectItem itemLabel=" - Selecionar - " itemValue=""/>
+                            <f:selectItems value="#{prioridadeBean.prioridades}" var="obj" itemLabel="#{obj.descricao}" itemValue="#{obj}"  />
+                        </h:selectOneMenu>
+        
+                        <h:outputLabel  value="Categoria:"/> 
+                        <h:selectOneMenu id="categoria" value="#{chamadoBean.chamado.categoriaChamado}" converter="baseEntityConverter">
+                            <f:selectItem itemLabel=" - Selecionar - " itemValue=""/>
+                            <f:selectItems value="#{categoriaChamadoBean.categoriaChamados}" var="obj" itemLabel="#{obj.descricao}" itemValue="#{obj}"  />
+                        </h:selectOneMenu>
+        
+                        <h:outputLabel value ="Tipo: " for ="campo-tipo" />
+                        <h:inputText value ="#{chamadoBean.chamado.tipoChamado}" id="campo-tipo" />
+        
+                        <h:outputLabel value ="Descrição Problema: " for ="campo-descricao" />
+                        <h:inputText value ="#{chamadoBean.chamado.descricaoChamado}" id="campo-descricao" />
+        
+                        <h:outputLabel value ="Solução: " for ="campo-solucao" />
+                        <h:inputText value ="#{chamadoBean.chamado.descricaoSolucao}" id="campo-solucao" />-->
+
+                    <p:commandButton value="Adicionar " action ="#{clienteBean.adicionaCliente()}" oncomplete="#{clienteBean.clientes}"/>
+            </h:panelGrid > 
+        </h:form>
+        <h:panelGroup>
+            <h1>Lista de Usuários :</h1>
+            <ul>
+                <ui:repeat value="#{clienteBean.clientes}" var="cliente">
+                    <li><h:outputText value="#{cliente.id} #{cliente.nome}"/></li>
+                </ui:repeat>
+            </ul>
+        </h:panelGroup>     
+    </ui:define>
+</ui:composition>

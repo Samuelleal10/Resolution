@@ -12,8 +12,8 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
+import repository.GenericRepository;
 import model.Status;
-import model.StatusRepository;
 
 /**
  *
@@ -24,22 +24,22 @@ import model.StatusRepository;
 public class StatusBean implements Serializable {
     
     private Status status = new Status();
-    private List<Status> statusall;
+    private List<Class> statusall;
 
     public void adicionaStatus() {
         EntityManager manager = this.getEntityManager();
-        StatusRepository repository = new StatusRepository(manager);
+        GenericRepository repository = new GenericRepository(manager);
         
         repository.adiciona(this.getStatus());
         this.setStatus(new Status());
         this.statusall = null;
     }
 
-    public List<Status> getStatusall() {
+    public List<Class> getStatusall() {
          if(this.statusall == null){
             EntityManager manager = this.getEntityManager();
-            StatusRepository repository = new StatusRepository(manager);
-            this.setStatusall(repository.buscaTodos());
+            GenericRepository repository = new GenericRepository(manager);
+            this.statusall = repository.buscaTodos("Status");
         }
         return this.statusall;
     }
@@ -70,7 +70,7 @@ public class StatusBean implements Serializable {
     /**
      * @param statusall the statusall to set
      */
-    public void setStatusall(List<Status> statusall) {
+    public void setStatusall(List<Class> statusall) {
         this.statusall = statusall;
     }
 }

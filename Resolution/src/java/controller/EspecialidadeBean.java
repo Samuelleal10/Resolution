@@ -11,7 +11,7 @@ import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
 import model.Especialidade;
-import model.EspecialidadeRepository;
+import repository.GenericRepository;
 
 /**
  *
@@ -20,18 +20,24 @@ import model.EspecialidadeRepository;
 @ManagedBean
 public class EspecialidadeBean {
         private Especialidade especialidade = new Especialidade();
+        private List<Class> especialidades;
 
     public void adicionaEspecialidade() {
         EntityManager manager = this.getEntityManager();
-        EspecialidadeRepository repository = new EspecialidadeRepository(manager);
+        GenericRepository repository = new GenericRepository(manager);
         repository.adiciona(this.especialidade);
         this.setEspecialidade(new Especialidade());
+        this.especialidades = null;
     }
 
-    public List<Especialidade> getEspecialidades() {
-        EntityManager manager = this.getEntityManager();
-        EspecialidadeRepository repository = new EspecialidadeRepository(manager);
-        return repository.buscaTodos();
+    public List<Class> getEspecialidades() {
+        if(this.especialidades == null){
+             EntityManager manager = this.getEntityManager();
+        GenericRepository repository = new GenericRepository(manager);
+        this.especialidades = repository.buscaTodos("Especialidade");
+        }
+       
+        return this.especialidades;
     }
 
     private EntityManager getEntityManager() {

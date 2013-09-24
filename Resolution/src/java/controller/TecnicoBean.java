@@ -10,7 +10,7 @@ import javax.faces.context.*;
 import javax.persistence.*;
 import javax.servlet.http.HttpServletRequest;
 import model.Tecnico;
-import model.TecnicoRepository;
+import repository.GenericRepository;
 
 /**
  *
@@ -20,19 +20,25 @@ import model.TecnicoRepository;
 public class TecnicoBean {
 
     private Tecnico tecnico = new Tecnico();
+    private List<Class> tecnicos;
 
     public void adicionaTecnico() {
         EntityManager manager = this.getEntityManager();
-        TecnicoRepository repository = new TecnicoRepository(manager);
+        GenericRepository repository = new GenericRepository(manager);
         System.out.println("entrou");
         repository.adiciona(this.getDep());
         this.setDep(new Tecnico());
+        this.tecnicos = null;
     }
 
-    public List<Tecnico> getTecnicos() {
-        EntityManager manager = this.getEntityManager();
-        TecnicoRepository repository = new TecnicoRepository(manager);
-        return repository.buscaTodos();
+    public List<Class> getTecnicos() {
+        if (this.tecnicos == null) {
+            EntityManager manager = this.getEntityManager();
+            GenericRepository repository = new GenericRepository(manager);
+            this.tecnicos = repository.buscaTodos("Tecnico");
+        }
+
+        return this.tecnicos;
     }
 
     private EntityManager getEntityManager() {

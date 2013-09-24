@@ -10,7 +10,7 @@ import javax.faces.context.*;
 import javax.persistence.*;
 import javax.servlet.http.HttpServletRequest;
 import model.Departamento;
-import model.DepartamentoRepository;
+import repository.GenericRepository;
 
 /**
  *
@@ -20,19 +20,24 @@ import model.DepartamentoRepository;
 public class DepartamentoBean {
 
     private Departamento dep = new Departamento();
+     private List<Class> departamentos;
 
     public void adicionaDepartamento() {
         EntityManager manager = this.getEntityManager();
-        DepartamentoRepository repository = new DepartamentoRepository(manager);
+        GenericRepository repository = new GenericRepository(manager);
         System.out.println("entrou");
         repository.adiciona(this.getDep());
         this.setDep(new Departamento());
+        this.departamentos = null;
     }
 
-    public List<Departamento> getDepartamentos() {
-        EntityManager manager = this.getEntityManager();
-        DepartamentoRepository repository = new DepartamentoRepository(manager);
-        return repository.buscaTodos();
+    public List<Class> getDepartamentos() {
+        if(this.departamentos == null){
+            EntityManager manager = this.getEntityManager();
+        GenericRepository repository = new GenericRepository(manager);
+        this.departamentos = repository.buscaTodos("Departamento");
+        }
+        return this.departamentos;
     }
 
     private EntityManager getEntityManager() {

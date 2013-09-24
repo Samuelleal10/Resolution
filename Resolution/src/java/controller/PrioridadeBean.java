@@ -13,7 +13,7 @@ import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
 import model.Prioridade;
-import model.PrioridadeRepository;
+import repository.GenericRepository;
 
 /**
  *
@@ -24,22 +24,22 @@ import model.PrioridadeRepository;
 public class PrioridadeBean implements Serializable {
     
     private Prioridade prioridade = new Prioridade();
-    private List<Prioridade> prioridades;
+    private List<Class> prioridades;
 
     public void adicionaPrioridade() {
         EntityManager manager = this.getEntityManager();
-        PrioridadeRepository repository = new PrioridadeRepository(manager);
+        GenericRepository repository = new GenericRepository(manager);
         
         repository.adiciona(this.getPrioridade());
         this.setPrioridade(new Prioridade());
         this.prioridades = null;
     }
 
-    public List<Prioridade> getPrioridades() {
+    public List<Class> getPrioridades() {
          if(this.prioridades == null){
             EntityManager manager = this.getEntityManager();
-            PrioridadeRepository repository = new PrioridadeRepository(manager);
-            this.prioridades =  repository.buscaTodos();
+            GenericRepository repository = new GenericRepository(manager);
+            this.prioridades =  repository.buscaTodos("Prioridade");
         }
         return this.prioridades;
     }

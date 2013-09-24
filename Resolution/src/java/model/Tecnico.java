@@ -8,6 +8,8 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import model.Especialidade;
 
 /**
@@ -15,7 +17,8 @@ import model.Especialidade;
  * @author Labin05
  */
 @Entity
-public class Tecnico extends Funcionario {
+@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
+public class Tecnico extends Funcionario implements Serializable{
 
     @Id @GeneratedValue
     private Long id;

@@ -13,7 +13,7 @@ import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
 import model.CategoriaChamado;
-import model.CategoriaChamadoRepository;
+import repository.GenericRepository;
 
 /**
  *
@@ -24,21 +24,21 @@ import model.CategoriaChamadoRepository;
 public class CategoriaChamadoBean implements Serializable {
      
     private CategoriaChamado categoriaChamado = new CategoriaChamado();
-    private List<CategoriaChamado> categoriaChamados;
+    private List<Class> categoriaChamados;
 
     public void adicionaCategoriaChamado() {
         EntityManager manager = this.getEntityManager();
-        CategoriaChamadoRepository repository = new CategoriaChamadoRepository(manager);
+        GenericRepository repository = new GenericRepository(manager);
         repository.adiciona(this.getCategoriaChamado());
         this.setCategoriaChamado(new CategoriaChamado());
         this.categoriaChamados = null;
     }
 
-    public List<CategoriaChamado> getCategoriaChamados() {
+    public List<Class> getCategoriaChamados() {
         if(this.categoriaChamados == null){
             EntityManager manager = this.getEntityManager();
-            CategoriaChamadoRepository repository = new CategoriaChamadoRepository(manager);
-            this.categoriaChamados = repository.buscaTodos();
+            GenericRepository repository = new GenericRepository(manager);
+            this.categoriaChamados = repository.buscaTodos("CategoriaChamado");
         }
        return this.categoriaChamados;
     }
