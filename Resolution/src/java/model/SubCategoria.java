@@ -9,17 +9,19 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import util.BaseEntity;
 
 /**
  *
  * @author Labin05
  */
 @Entity
-public class SubCategoria implements Serializable {
+public class SubCategoria implements Serializable, BaseEntity {
     @Id
     @GeneratedValue
     private Long id;
     private String nome;
+    private CategoriaChamado categoriaChamado;
 
     public Long getId() {
         return id;
@@ -66,6 +68,20 @@ public class SubCategoria implements Serializable {
      */
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    /**
+     * @return the categoriaChamado
+     */
+    public CategoriaChamado getCategoriaChamado() {
+        return categoriaChamado;
+    }
+
+    /**
+     * @param categoriaChamado the categoriaChamado to set
+     */
+    public void setCategoriaChamado(CategoriaChamado categoriaChamado) {
+        this.categoriaChamado = categoriaChamado;
     }
     
 }

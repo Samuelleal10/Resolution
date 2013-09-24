@@ -5,21 +5,23 @@
 package model;
 
 import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import java.util.*;
+import javax.persistence.*;
+import util.BaseEntity;
 
 /**
  *
  * @author Labin05
  */
 @Entity
-public class Equipe implements Serializable {
+public class Equipe implements Serializable, BaseEntity {
     @Id
     @GeneratedValue
     private Long id;
     private String nome;
+    
+    @OneToMany(mappedBy="equipe")
+    private List<CategoriaChamado> categoriasChamados = new ArrayList<CategoriaChamado>();
 
     public Long getId() {
         return id;

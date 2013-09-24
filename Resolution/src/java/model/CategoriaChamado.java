@@ -5,21 +5,35 @@
 package model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import util.BaseEntity;
 
 /**
  *
  * @author Labin05
  */
 @Entity
-public class CategoriaChamado implements Serializable {
+public class CategoriaChamado implements Serializable, BaseEntity {
+
     @Id
     @GeneratedValue
     private Long id;
     private String descricao;
+    private Equipe equipe;
+    
+    @OneToMany(mappedBy = "categoriaChamado")
+    private List<SubCategoria> subCategorias = new ArrayList<SubCategoria>();
+    
+     @OneToMany(mappedBy="categoriaChamado")
+    private List<Chamado> chamados = new ArrayList<Chamado>();
 
     public Long getId() {
         return id;
@@ -67,5 +81,32 @@ public class CategoriaChamado implements Serializable {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-    
+
+    /**
+     * @return the equipe
+     */
+    public Equipe getEquipe() {
+        return equipe;
+    }
+
+    /**
+     * @param equipe the equipe to set
+     */
+    public void setEquipe(Equipe equipe) {
+        this.equipe = equipe;
+    }
+
+    /**
+     * @return the subCategorias
+     */
+    public List<SubCategoria> getSubCategorias() {
+        return subCategorias;
+    }
+
+    /**
+     * @param subCategorias the subCategorias to set
+     */
+    public void setSubCategorias(List<SubCategoria> subCategorias) {
+        this.subCategorias = subCategorias;
+    }
 }

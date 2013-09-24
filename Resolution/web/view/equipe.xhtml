@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<ui:composition template="/layout/layout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                >   
+
+
+    <ui:define name="title">
+       Equipes
+    </ui:define>  
+
+<!--    <ui:define name="menu-geral">
+        <ui:include src="menu.xhtml" />
+    </ui:define>   -->
+
+    <ui:define name="conteudo">
+
+        Equipes:
+        <h:form>
+            <h:panelGrid columns ="2">
+                <h:outputLabel value ="Nome: " for ="campo-nome" />
+                <h:inputText value ="#{equipeBean.equipe.nome}" id="campo-nome" />
+
+                <p:commandButton value="Adicionar " action ="#{equipeBean.adicionaEquipe}" oncomplete="#{equipeBean.equipes}"/>
+            </h:panelGrid > 
+        </h:form>
+        <h:panelGroup>
+            <h1>Lista de Equipes :</h1>
+            <ul>
+                <ui:repeat value="#{equipeBean.equipes}" var="equipe">
+                    <li><h:outputText value="#{equipe.id} #{equipe.nome}"/></li>
+                </ui:repeat>
+            </ul>
+        </h:panelGroup>     
+    </ui:define>
+</ui:composition>

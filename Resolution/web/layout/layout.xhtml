@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"  
+      xmlns:p="http://primefaces.org/ui"
+      >
+
+    <h:head>        
+        <title>
+            <ui:insert name="title">Resolution</ui:insert>            
+        </title>
+        <link href='http://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'/>
+        <link rel="stylesheet" href="#{facesContext.externalContext.request.contextPath}/resourses/css/style.css"/>
+        <link rel="icon"               
+              href="#{facesContext.externalContext.request.contextPath}/template/favicon.ico"/>      
+        <meta http-equiv="content-type" content="text/html;charset=utf-8" />               
+    </h:head>
+
+    <h:body>        
+        <p:layout fullPage="true">
+            
+<!--            Topo-->
+            <p:layoutUnit position="north" size="90" resizable="true" closable="true" collapsible="true" effect="drop" >
+                <h:outputText value="Topo" /> 
+            </p:layoutUnit>
+
+            <p:layoutUnit position="south" size="40">
+                <ui:insert name="rodape">
+                    <center> <span style="font-size: 10pt; color: gray;">Resolution - Todos os direitos reservados - 2013</span></center>
+                </ui:insert>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="west" size="220" header="#{UsuarioController.loggedUsuario.permissao}" resizable="true" closable="true" collapsible="true" >
+                <h:outputText value="Menu principal" /> 
+                <!--                <ui:insert name="menu-geral">
+                    <ui:include src="/template/menu.xhtml"/> 
+                </ui:insert>-->
+            </p:layoutUnit>          
+            <p:layoutUnit id="conteudo" position="center" resizable="true" closable="true" collapsible="true" effect="drop">
+                <p:messages showDetail="true" autoUpdate="true" />
+                <ui:insert name="conteudo">
+
+                </ui:insert>
+            </p:layoutUnit>
+
+        </p:layout>
+    </h:body>
+</html>

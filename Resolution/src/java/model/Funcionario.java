@@ -4,11 +4,14 @@
  */
 package model;
 
+import javax.persistence.MappedSuperclass;
+
 /**
  *
  * @author Labin05
  */
-public class Funcionario {
+@MappedSuperclass
+public abstract class Funcionario {
     private String nome;
     private String nivel;
     private String telefone;

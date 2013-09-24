@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<ui:composition template="/layout/layout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                >   
+    <ui:define name="title">
+        Sub-Categorias
+    </ui:define>  
+<!--
+    <ui:define name="menu-geral">
+        <ui:include src="menu.xhtml" />
+    </ui:define>   -->
+
+
+    <ui:define name="conteudo">
+
+        Sub-Categorias
+        <h:form>
+            <h:panelGrid columns ="2">
+                <h:outputLabel value ="Nome: " for ="campo-nome" />
+                <h:inputText value ="#{subCategoriaBean.subCategoria.nome}" id="campo-nome" />
+                
+                 <h:outputLabel  value="Categoria"/> 
+                 <h:selectOneMenu id="equipe" value="#{subCategoriaBean.subCategoria.categoriaChamado}" converter="baseEntityConverter">
+                        <f:selectItem itemLabel=" - Selecionar - " itemValue=""/>
+                        <f:selectItems value="#{categoriaChamadoBean.categoriaChamados}" var="obj" itemLabel="#{obj.descricao}" itemValue="#{obj}"  />
+                    </h:selectOneMenu>
+                <h:commandButton value="Adicionar" action="#{subCategoriaBean.adicionaSubCategoria}" />
+            </h:panelGrid > 
+        </h:form>
+        <h:panelGroup rendered ="#{not empty equipeBean.equipes}">
+            <h1>Lista de Sub-categorias :</h1>
+            <ul>
+                <ui:repeat value="#{subCategoriaBean.subCategorias}" var="subcategoria">
+                    <li><h:outputText value="#{subcategoria.id} #{subcategoria.nome}"/></li>
+                </ui:repeat>
+            </ul>
+        </h:panelGroup>
+    </ui:define>
+</ui:composition>

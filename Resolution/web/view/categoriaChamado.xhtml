@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<ui:composition template="/layout/layout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                >   
+    <ui:define name="title">
+        Categorias
+    </ui:define>  
+<!--
+    <ui:define name="menu-geral">
+        <ui:include src="menu.xhtml" />
+    </ui:define>   -->
+
+
+    <ui:define name="conteudo">
+
+        Categoria para Chamados:
+        <h:form>
+            <h:panelGrid columns ="2">
+                <h:outputLabel value ="Nome: " for ="campo-descricao" />
+                <h:inputText value ="#{categoriaChamadoBean.categoriaChamado.descricao}" id="campo-descricao" />
+                
+                 <h:outputLabel  value="Equipe"/> 
+                     <h:selectOneMenu id="equipe" value="#{categoriaChamadoBean.categoriaChamado.equipe}" converter="baseEntityConverter">
+                        <f:selectItem itemLabel=" - Selecionar - " itemValue=""/>
+                        <f:selectItems value="#{equipeBean.equipes}" var="obj" itemLabel="#{obj.nome}" itemValue="#{obj}"  />
+                    </h:selectOneMenu>
+                <h:commandButton value="Adicionar" action="#{categoriaChamadoBean.adicionaCategoriaChamado}" />
+            </h:panelGrid > 
+        </h:form>
+        <h:panelGroup rendered ="#{not empty equipeBean.equipes}">
+            <h1>Categorias de Chamado:</h1>
+            <ul>
+                <ui:repeat value="#{categoriaChamadoBean.categoriaChamados}" var="cat">
+                    <li><h:outputText value="#{cat.id} #{cat.descricao}"/></li>
+                </ui:repeat>
+            </ul>
+        </h:panelGroup>
+    </ui:define>
+</ui:composition>

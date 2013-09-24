@@ -5,21 +5,27 @@
 package model;
 
 import java.io.Serializable;
+import java.util.*;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import util.BaseEntity;
 
 /**
  *
  * @author Labin05
  */
 @Entity
-public class Prioridade implements Serializable {
+public class Prioridade implements Serializable, BaseEntity {
     @Id
     @GeneratedValue
     private Long id;
     private String descricao;
+      
+    @OneToMany(mappedBy="prioridade")
+    private List<Chamado> chamados = new ArrayList<Chamado>();
 
     public Long getId() {
         return id;
@@ -66,6 +72,20 @@ public class Prioridade implements Serializable {
      */
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    /**
+     * @return the chamados
+     */
+    public List<Chamado> getChamados() {
+        return chamados;
+    }
+
+    /**
+     * @param chamados the chamados to set
+     */
+    public void setChamados(List<Chamado> chamados) {
+        this.chamados = chamados;
     }
     
 }
